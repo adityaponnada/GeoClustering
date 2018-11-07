@@ -11,7 +11,7 @@ GeoFile <- read.csv(inPath,sep = ",", header = TRUE)
 ## Reverse geo code the location
 ##userGeoFile$PLACE <- revgeo::revgeo(userGeoFile$LONG, userGeoFile$LAT, provider = NULL, API = NULL, output = NULL, item = NULL)
 
-user_id = "uema30@micropa_com"
+user_id = "uema01@micropa_com"
 
 userGeoFile <- subset(GeoFile, GeoFile$USER_ID == user_id)
 
