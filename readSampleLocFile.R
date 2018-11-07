@@ -13,7 +13,24 @@ GeoFile <- read.csv(inPath,sep = ",", header = TRUE)
 
 user_id = "uema01@micropa_com"
 
-userGeoFile <- subset(GeoFile, GeoFile$USER_ID == user_id)
+userGeoFile1 <- subset(GeoFile, GeoFile$USER_ID == user_id) ### GeoFile1 contains outliers
+
+nrow(userGeoFile1)
+
+iqr_val <- IQR(userGeoFile1$ACC)
+cut_off <- iqr_val*1.5
+
+rr <- quantile(userGeoFile1$ACC)
+
+rr
+
+tippingPoint <- 64.10 + cut_off
+
+# tippingPoint <- mean(userGeoFile1$ACC) + 3*sd(userGeoFile1$ACC)
+# 
+userGeoFile <- subset(userGeoFile1, userGeoFile1$ACC <= tippingPoint)
+
+nrow(userGeoFile)
 
 # library(plotly)
 # 
@@ -24,17 +41,12 @@ library(ggplot2)
 
 #### Use user id no to denote the plots
 
-g30 <- ggplot(data = userGeoFile, aes(x=LAT, y=LONG))+
+g01 <- ggplot(data = userGeoFile, aes(x=LAT, y=LONG))+
   geom_count() +
-  labs(title = user_id, subtitle = "1 week long. lat.")
+  labs(title = user_id, subtitle = "4 week long. lat.")
 
 gAll <- ggplot(data = GeoFile, aes(x=LAT, y=LONG))+
   geom_count() +
   labs(title = "All participantas")+
   ylim(-100, -60)
 
-
-
-AllGeoPath = ""
-
-write.csv(GeoFile, file = "MyData.csv")

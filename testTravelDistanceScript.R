@@ -44,15 +44,20 @@ distanceData$START_TIME <- as.POSIXct(distanceData$START_TIME, format = "%Y-%m-%
 distanceData$STOP_TIME <- as.POSIXct(distanceData$STOP_TIME, format = "%Y-%m-%d %H:%M:%OS")
 distanceData$DIST <- as.numeric(distanceData$DIST)
 
+distanceData$TIME_DIFF <- difftime(distanceData$STOP_TIME, distanceData$START_TIME, units = "mins")
+distanceData$TIME_DIFF <- as.numeric(distanceData$TIME_DIFF)
+distanceData$DIST_MIN <- distanceData$DIST/distanceData$TIME_DIFF
+
+
 library(plotly)
 
-distPlot <- plot_ly(data = distanceData, x = ~START_TIME, y = ~DIST, type = 'scatter', mode = 'markers', color = 'rgba(255, 182, 193, .9)')
+distPlot <- plot_ly(data = distanceData, x = ~START_TIME, y = ~DIST_MIN, type = 'scatter', mode = 'markers', color = 'rgba(255, 182, 193, .9)')
 
 library(ggplot2)
 
 #p <-ggplot(data=distanceData, aes(x=STOP_TIME, y=DIST)) +
   #geom_bar()
 
-savePath = "C:/Users/Dharam/Downloads/microEMA/StudyFiles/Responses_uEMA/Location/uema01_loc/distanceData.csv"
+savePath = "C:/Users/Dharam/Downloads/microEMA/StudyFiles/Responses_uEMA/Location/uema01_loc/distanceData_IQR.csv"
 
 write.csv(distanceData, file = savePath, row.names = FALSE, sep = ",")
