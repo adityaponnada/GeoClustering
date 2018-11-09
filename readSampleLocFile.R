@@ -36,6 +36,14 @@ nrow(userGeoFile)
 # 
 # p <- plot_ly(data = userGeoFile, x = ~LAT, y = ~LONG, type = 'scatter', mode = 'markers', size = ~ACC)
 
+## Extract unique logging times
+
+userGeoFile <- subset(userGeoFile,!(duplicated(userGeoFile$HEADER_TIME)))
+
+
+### Sort by header time stamp
+userGeoFile <- userGeoFile[order(userGeoFile$HEADER_TIME),]
+
 
 library(ggplot2)
 

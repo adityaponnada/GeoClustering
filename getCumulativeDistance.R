@@ -1,21 +1,18 @@
 cumulativeDist <- distanceData
 
-cumulativeDist <- subset(cumulativeDist, !is.nan(cumulativeDist$DIST_MIN))
-cumulativeDist <- subset(cumulativeDist, cumulativeDist$DIST_MIN != Inf)
+# cumulativeDist <- subset(cumulativeDist, !is.nan(cumulativeDist$DIST_MIN))
+# cumulativeDist <- subset(cumulativeDist, cumulativeDist$DIST_MIN != Inf)
 
 cumulativeDist$CUM_DIST <- NA
 
-cumulativeDist$CUM_DIST[1] <- cumulativeDist$DIST_MIN[1]
+cumulativeDist$CUM_DIST[1] <- cumulativeDist$DIST[1]
 
 for (i in 2:nrow(cumulativeDist)){
   
   
   print(paste0("i is ", i))
   
-  cumulativeDist$CUM_DIST[i] <- cumulativeDist$CUM_DIST[i-1] + cumulativeDist$DIST_MIN[i]
-  
-  
-  
+  cumulativeDist$CUM_DIST[i] <- cumulativeDist$CUM_DIST[i-1] + cumulativeDist$DIST[i]
 }
 
 
@@ -24,7 +21,7 @@ library(plotly)
 
 ## 4 weeks cumulative distance
 
-cumPlot4Weeks <- plot_ly(data = cumulativeDist, x = ~STOP_TIME, y = ~CUM_DIST, type = 'scatter', mode = 'markers')
+cumPlot4Weeks <- plot_ly(data = cumulativeDist, x = ~STOP_TIME, y = ~CUM_DIST, type = 'bar') 
 
 ## for the 4 weeks
 

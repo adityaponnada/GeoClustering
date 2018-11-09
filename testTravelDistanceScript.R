@@ -14,14 +14,14 @@ stop_time = as.POSIXct(stop_time)
 
 test <- userGeoFile
 
-test$LOG_TIME <- as.character(test$LOG_TIME)
+test$HEADER_TIME <- as.character(test$HEADER_TIME)
 
 for (i in 1:nrow(test)){
   
   print(paste0("i is ", i))
   
-  start_time <- test$LOG_TIME[i]
-  stop_time <- test$LOG_TIME[i+1]
+  start_time <- test$HEADER_TIME[i]
+  stop_time <- test$HEADER_TIME[i+1]
   dist_diff <- distHaversine(c(test$LONG[i], test$LAT[i]), c(test$LONG[i+1], test$LAT[i+1]))
   lat1 <- test$LAT[i]
   long1 <- test$LONG[i]
@@ -51,13 +51,13 @@ distanceData$DIST_MIN <- distanceData$DIST/distanceData$TIME_DIFF
 
 library(plotly)
 
-distPlot <- plot_ly(data = distanceData, x = ~START_TIME, y = ~DIST_MIN, type = 'scatter', mode = 'markers', color = 'rgba(255, 182, 193, .9)')
+distPlot <- plot_ly(data = distanceData, x = ~STOP_TIME, y = ~DIST_MIN, type = 'scatter', mode = 'markers', color = 'rgba(255, 182, 193, .9)')
 
 library(ggplot2)
 
 #p <-ggplot(data=distanceData, aes(x=STOP_TIME, y=DIST)) +
   #geom_bar()
 
-savePath = "C:/Users/Dharam/Downloads/microEMA/StudyFiles/Responses_uEMA/Location/uema01_loc/distanceData_IQR.csv"
+savePath = "C:/Users/Dharam/Downloads/microEMA/StudyFiles/Responses_uEMA/Location/uema01_loc/distanceData_UniqueTimes.csv"
 
 write.csv(distanceData, file = savePath, row.names = FALSE, sep = ",")
