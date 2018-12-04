@@ -25,3 +25,15 @@ for (i in 1:nrow(userGeoFile)){
   }
   
 }
+
+
+userGeoFile$CLUSTER_ID <- as.factor(userGeoFile$CLUSTER)
+
+
+### Plot the clustered distribution
+qmplot(LONG, LAT, data = userGeoFile, color = I("green"), size = I(3), darken = 0.3)
+g01Clustered <- ggplot(data = userGeoFile, aes(x=LAT, y=LONG, color = CLUSTER_ID))+
+  geom_count() +
+  labs(title = user_id, subtitle = "4 week long. lat.")
+
+
