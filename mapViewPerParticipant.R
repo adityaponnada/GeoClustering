@@ -17,6 +17,8 @@ library(tidyverse)
 # 
 # get_map("Japan", zoom = 5) %>% ggmap()
 
+## only for participant 9 or others who have an outlier point (like north pole or the middle of an ocean)
+userGeoFile <- subset(userGeoFile, userGeoFile$LONG < 13.00)
 
-qmplot(LONG, LAT, data = userGeoFile, color = I('red'), size = I(3), darken = 0.3)
+mapPlot <- qmplot(LONG, LAT, data = userGeoFile, color = I('red'), size = I(3), darken = 0.3)
                                                                 

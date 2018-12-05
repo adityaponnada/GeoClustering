@@ -11,20 +11,20 @@ GeoFile <- read.csv(inPath,sep = ",", header = TRUE)
 ## Reverse geo code the location
 ##userGeoFile$PLACE <- revgeo::revgeo(userGeoFile$LONG, userGeoFile$LAT, provider = NULL, API = NULL, output = NULL, item = NULL)
 
-user_id = "uema01@micropa_com"
+user_id = "uema02@micropa_com"
 
 userGeoFile1 <- subset(GeoFile, GeoFile$USER_ID == user_id) ### GeoFile1 contains outliers
 
 nrow(userGeoFile1)
 
-iqr_val <- IQR(userGeoFile1$ACC)
+iqr_val <- IQR(userGeoFile1$ACC, na.rm = TRUE)
 cut_off <- iqr_val*1.5
 
-rr <- quantile(userGeoFile1$ACC)
+rr <- quantile(userGeoFile1$ACC, na.rm = TRUE)
 
 rr
 
-tippingPoint <- 64.10 + cut_off
+tippingPoint <- 19.405 + cut_off ##Insert 75th percentile here
 
 # tippingPoint <- mean(userGeoFile1$ACC) + 3*sd(userGeoFile1$ACC)
 # 

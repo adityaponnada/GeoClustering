@@ -23,8 +23,8 @@ dataMat <- data.matrix(userCoordFile, rownames.force = NA)
 # db_objectSmall <- fpc::dbscan(dist1, 1.0, MinPts = 10, method = "dist")
 # plot(db_objectSmall, headuserGeo, main = "DBSCAN", frame = FALSE)
 # 
-db_object_dbscan <- dbscan::dbscan(dataMat,eps = 0.1, minPts = 5, weights = NULL, borderPoints = TRUE)
-db_object_2 <- dbscan::dbscan(select(userCoordFile, LAT, LONG),eps = 0.15)
+#db_object_dbscan <- dbscan::dbscan(dataMat,eps = 0.1, minPts = 5, weights = NULL, borderPoints = TRUE)
+#db_object_2 <- dbscan::dbscan(select(userCoordFile, LAT, LONG),eps = 0.15)
 
 #userCoordFile <- head(userCoordFile, 1440)
 
@@ -43,7 +43,9 @@ db_object_2 <- dbscan::dbscan(select(userCoordFile, LAT, LONG),eps = 0.15)
 
 #dist <- earth.dist(collapsedFile, dist = T)
 
-db_object <- fpc::dbscan(dataMat, 0.05, MinPts = 60, method = "raw", scale = TRUE)
+##Default 0.05, set to 0.00010 to test
+
+db_object <- fpc::dbscan(dataMat, 0.00010, MinPts = 180, method = "raw", scale = FALSE)
 plot(db_object, userCoordFile, main = "DBSCAN", frame = FALSE)
 
 # hdb_object <- hdbscan(collapsedFile, 10, xdist = dist, gen_hdbscan_tree = FALSE,

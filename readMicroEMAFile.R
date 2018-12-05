@@ -2,7 +2,7 @@
 
 uEMAFile <- read.csv("C:/Users/Dharam/Downloads/microEMA/StudyFiles/Responses_uEMA/uEMAPromptResponses.csv", header = TRUE, sep = ",")
 
-user_id = "uema01@micropa_com"
+user_id = "uema02@micropa_com"
 
 uEMAUser <- subset(uEMAFile, uEMAFile$USER_ID == user_id)
 
