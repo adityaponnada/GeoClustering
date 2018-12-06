@@ -7,7 +7,7 @@ user_id = "uema02@micropa_com"
 uEMAUser <- subset(uEMAFile, uEMAFile$USER_ID == user_id)
 
 
-uEMAUser$VAL <- 70000
+uEMAUser$VAL <- 20
 
 uEMAUser$RESPONDED[uEMAUser$ACTIVITY_TYPE != "MISSED" & uEMAUser$ACTIVITY_TYPE != "DISMISSED"] <- "RESPONSE"
 uEMAUser$RESPONDED[uEMAUser$ACTIVITY_TYPE == "MISSED" | uEMAUser$ACTIVITY_TYPE == "DISMISSED"] <- "NO RESPONSE"
